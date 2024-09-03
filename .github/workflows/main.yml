@@ -16,6 +16,7 @@ jobs:
         node-version: 22.x
     - name: run 
       run: | 
+        cd ci-cd-vite
         npm install
         npm run build
     - name: upload artefacts

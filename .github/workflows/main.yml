@@ -26,6 +26,7 @@ jobs:
         ls
         cd ci-cd-vite
         cd dist
+        ls
         zip -r artifact.zip
     - name: upload artifacts
       uses: actions/upload-artifact@v4

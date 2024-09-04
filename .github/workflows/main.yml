@@ -19,9 +19,11 @@ jobs:
         cd ci-cd-vite
         npm install
         npm run build
+        ls
     - name: 'Zip build'
       shell: bash
       run: |
+        ls
         pushd ./ci-cd-vite/dist
         zip -r artifact.zip
     - name: upload artifacts

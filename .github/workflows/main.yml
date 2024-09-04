@@ -20,10 +20,11 @@ jobs:
         npm install
         npm run build
     - name: upload artifacts
-      uses: actions/upload-artifact@v4.3.4
+      uses: actions/upload-artifact@v4
       with:
         name: artifact
         path: ./dist
+        if-no-files-found: error
 
   job-deploy:
     runs-on: ubuntu-latest
@@ -31,10 +32,10 @@ jobs:
 
     steps: 
     - name: download artifact
-      uses: actions/download-artifact@v4.1.8
+      uses: actions/download-artifact@v4
       with:
         name: artifact
-        path: .
+        
     - name: Azure functions deploy
       uses: Azure/static-web-apps-deploy@v1
       with:

@@ -22,13 +22,13 @@ jobs:
     - name: 'Zip build'
       shell: bash
       run: |
-        pushd ./dist
+        pushd ./ci-cd-vite/dist
         zip -r artifact.zip
     - name: upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: artifact
-        path: dist/artifact.zip
+        path: ./ci-cd-vite/dist/artifact.zip
         if-no-files-found: error
 
   job-deploy:

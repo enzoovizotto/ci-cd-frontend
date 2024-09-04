@@ -19,11 +19,11 @@ jobs:
         cd ci-cd-vite
         npm install
         npm run build
-    - name: upload artefacts
+    - name: upload artifacts
       uses: actions/upload-artifact@v4.3.4
       with:
         name: artifact
-        path: .
+        path: ./dist
 
   job-deploy:
     runs-on: ubuntu-latest
@@ -38,5 +38,9 @@ jobs:
     - name: Azure functions deploy
       uses: Azure/static-web-apps-deploy@v1
       with:
-        app-name: "ci-cd-frontend"
-        publish-profile: ${{secrets.azure_publish_profile_front}}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        azure_static_web_apps_api_token: ${{secrets[AZURE_PUBLISH_PROFILE_FRONT] }}
+        action: "upload"
+        app_location: "/"
+        app_artifact_location: "/"
+        skip_app_build: true

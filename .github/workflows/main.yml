@@ -19,11 +19,16 @@ jobs:
         cd ci-cd-vite
         npm install
         npm run build
+    - name: 'Zip build'
+      shell: bash
+      run: |
+        pushd ./dist
+        zip -r artifact.zip
     - name: upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: artifact
-        path: dist
+        path: dist/artifact.zip
         if-no-files-found: error
 
   job-deploy:
@@ -35,6 +40,12 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: artifact
+
+    - name: "Unzip Artifact"
+      shell: bash
+      run: |
+        unzip artifact.zip -d .
+        rm artifact.zip
         
     - name: Azure functions deploy
       uses: Azure/static-web-apps-deploy@v1

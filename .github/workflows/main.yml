@@ -5,23 +5,18 @@ on:
 
 jobs: 
   job-build:
-    runs-on: ubuntu-latest
 
-    steps: 
-    - name: build
-      uses: NixonMSilva/ci-cd-tech/.github/workflows/back-end-build.yml@main
-      with:
-        node-version: 20
+    name: build
+    uses: enzoovizotto/ci-cd-reutilizavel-front/.github/workflows/build_template.yml@main
+    with:
+      node-version: 20
 
   job-deploy:
-    runs-on: ubuntu-latest
     needs: job-build
 
-    steps: 
-    - name: deploy
-      uses: enzoovizotto/ci-cd-reutilizavel-front/.github/workflows/deploy_tempalte.yml@main
-      with:
-        environment: prod
-        publish-profile: "PUBLISH_PROFILE"
-      secrets:  
-        publish-profile: ${{ secrets.PUBLISH_PROFILE }} 
+    name: deploy
+    uses: enzoovizotto/ci-cd-reutilizavel-front/.github/workflows/deploy_tempalte.yml@main
+    with:
+      environment: prod
+      publish-profile: "AZURE_PUBLISH_PROFILE_FRONT"
+    secrets: inherit

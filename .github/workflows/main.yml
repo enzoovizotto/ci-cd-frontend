@@ -11,6 +11,7 @@ jobs:
     uses: enzoovizotto/ci-cd-reutilizavel-front/.github/workflows/build_template.yml@main
     with:
       node-version: 20
+      repo-path: ci-cd-vite
 
   job-deploy:
     needs: job-build

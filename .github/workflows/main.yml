@@ -12,6 +12,7 @@ jobs:
     with:
       node-version: 20
       repo-path: ci-cd-vite
+      output-path: dist
 
   job-deploy:
     needs: job-build
